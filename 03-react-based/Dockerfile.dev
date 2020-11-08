@@ -1,0 +1,22 @@
+# --network=host 옵션은 VirtualBox 환경인 경우
+# docker build --network=host -f Dockerfile.dev -t mvmaniaz/react-dev ./
+
+# 리눅스 환경인 경우 
+# docker run -d -p3000:3000 -v/app/node_modules -v$(pwd):/app --name react-dev mvmaniaz/react-dev
+
+# 윈도우 환경인 경우
+# CHOKIDAR_USEPOLLING 환경 변수를 값을 주어야 핫 리로딩이 됨
+# docker run -d -p3000:3000 -eCHOKIDAR_USEPOLLING=true -v/app/node_modules -v%cd%:/app --name react-dev mvmaniaz/react-dev
+
+FROM node:alpine
+
+WORKDIR /app
+
+COPY package.json ./
+
+RUN npm i --save-prod
+
+COPY src ./src
+COPY public ./public
+
+CMD ["npm", "run", "start"]

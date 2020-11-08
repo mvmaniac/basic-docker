@@ -1,0 +1,26 @@
+# docker-compose -p mvmaniaz up -d --build
+
+version: "3.8"
+services:
+  react:
+    container_name: app-dev
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+      network: host
+    ports:
+        - 3000:3000
+    volumes:
+      - /app/node_modules
+      - ./:/app
+    stdin_open: true
+  tests:
+    container_name: app-dev-test
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+      network: host
+    volumes:
+      - /app/node_modules
+      - ./:/app
+    command: ["npm", "run", "test"]
