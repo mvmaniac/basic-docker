@@ -10,6 +10,6 @@ services:
     container_name: app
     build: 
       context: .
-      network: host
+      network: host # VirtualBox 에서 실행 할 경우
     ports:
         - 8080:8080

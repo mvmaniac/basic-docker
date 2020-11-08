@@ -1,5 +1,6 @@
-# 빌드: docker build --network=host -t mvmaniaz/nodejs ./
-# 실행: docker run -d -p8080:8080 -v/app/node_modules -v$(pwd):/app --name node mvmaniaz/nodejs 
+# --network=host 옵션은 VirtualBox 환경인 경우
+# docker build --network=host -t mvmaniaz/nodejs ./
+# docker run -d -p8080:8080 -v/app/node_modules -v$(pwd):/app --name node mvmaniaz/nodejs 
 
 # 베이스 이미지를 명시
 FROM node:14
