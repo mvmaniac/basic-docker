@@ -1,0 +1,54 @@
+# docker-compose -f docker-compose.dev.yml -p react-nodejs-based up -d --build
+# docker-compose -f docker-compose.dev.yml -p react-nodejs-based down
+# expose의 포트는 명시적으로 해줌
+
+version: "3.8"
+services:
+  front-end:
+    container_name: front-end
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./front-end
+      network: host
+    volumes:
+      - /app/node_modules
+      - ./front-end:/app
+    stdin_open: true
+    expose:
+      - "3000"
+
+  back-end:
+    container_name: back-end
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./back-end
+      network: host
+    volumes:
+      - /app/node_modules
+      - ./back-end:/app
+    expose:
+      - "5000"
+
+  mysql:
+    container_name: mysql
+    restart: unless-stopped
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./mysql
+    volumes:
+      - ./mysql/mysql-data:/var/lib/mysql
+      - ./mysql/sql:/docker-entrypoint-initdb.d/
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: docker_db
+    expose:
+      - "3306"
+
+  nginx:
+    container_name: nginx
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    ports:
+      - "3000:80"
