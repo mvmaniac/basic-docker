@@ -10,7 +10,7 @@ WORKDIR /app
 COPY package.json ./
 
 # 추가적으로 필요한 파일들을 다운로드
-RUN npm i --save-prod
+RUN npm i --production
 
 COPY src ./src
 
