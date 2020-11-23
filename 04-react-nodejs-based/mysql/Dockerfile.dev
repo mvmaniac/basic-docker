@@ -1,0 +1,6 @@
+FROM mysql:5.7
+
+# mysql계정의 uid 값을 호스트 os계정의 uid로 변경
+RUN usermod -u 1000 mysql
+
+ADD ./my.cnf /etc/mysql/conf.d/my.cnf

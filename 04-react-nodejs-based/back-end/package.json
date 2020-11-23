@@ -15,11 +15,11 @@
     "mysql": "^2.18.1"
   },
   "devDependencies": {
-    "eslint": "^7.13.0",
+    "eslint": "^7.14.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-import": "^2.22.1",
     "nodemon": "^2.0.6",
-    "prettier": "^2.1.2"
+    "prettier": "^2.2.0"
   }
 }

@@ -7,19 +7,8 @@ const app = express();
 
 app.use(bodyParser.json());
 
-db.pool.query(
-  `create table lists (
-  id integer auto_increment,
-  value text,
-  primary key (id)
-)`,
-  (err, results) => {
-    console.log(`results: ${results}`);
-  }
-);
-
 app.get('/api/values', (req, res) => {
-  db.pool.query('select * from lists;', (err, results) => {
+  db.pool.query('select id, value from lists', (err, results) => {
     if (err) {
       return res.status(500).end();
     }
@@ -29,7 +18,7 @@ app.get('/api/values', (req, res) => {
 
 app.post('/api/value', (req, res) => {
   db.pool.query(
-    `insert into lists (value) values(${req.body.value}`,
+    `insert into lists (value) values("${req.body.value}")`,
     // err, results, fields
     (err) => {
       if (err) {

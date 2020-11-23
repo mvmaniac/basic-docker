@@ -5,7 +5,7 @@ const pool = mysql.createPool({
   host: 'mysql',
   user: 'root',
   password: '1234',
-  database: 'test'
+  database: 'docker_db'
 });
 
-export default pool;
+exports.pool = pool;
