@@ -1,0 +1,33 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "front-end",
+      "image": "mvmaniaz/react-nodejs-based-back",
+      "hostname": "front-end",
+      "essential": false,
+      "memory": 128
+    },
+    {
+      "name": "back-end",
+      "image": "mvmaniaz/react-nodejs-based-back",
+      "hostname": "back-end",
+      "essential": false,
+      "memory": 128
+    },
+    {
+      "name": "nginx",
+      "image": "mvmaniaz/react-nodejs-based-nginx",
+      "hostname": "nginx",
+      "essential": true,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links": ["front-end", "back-end"],
+      "memory": 128
+    }
+  ]
+}
