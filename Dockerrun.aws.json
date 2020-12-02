@@ -3,7 +3,7 @@
   "containerDefinitions": [
     {
       "name": "front-end",
-      "image": "mvmaniaz/react-nodejs-based-back",
+      "image": "mvmaniaz/react-nodejs-based-front",
       "hostname": "front-end",
       "essential": false,
       "memory": 128
