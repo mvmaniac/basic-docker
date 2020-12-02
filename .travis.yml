@@ -20,14 +20,15 @@ after_success:
   - docker push mvmaniaz/react-nodejs-based-front
   - docker push mvmaniaz/react-nodejs-based-back
   - docker push mvmaniaz/react-nodejs-based-nginx
-# deploy:
-#   provider: elasticbeanstalk
-#   region: "ap-northeast-2"
-#   app: "docker-react-app"
-#   env: "DockerReactApp-env"
-#   bucket_name: "elasticbeanstalk-ap-northeast-2-000140339722"
-#   bucket_path: "docker-react-app"
-#   on:
-#     branch: main
-#   access_key_id: $AWS_ACCESS_KEY
-#   secret_access_key: $AWS_SECRET_ACCESS_KEY
+
+deploy:
+  provider: elasticbeanstalk
+  region: "ap-northeast-2"
+  app: "react-nodejs-based"
+  env: "ReactNodejsBased-env"
+  bucket_name: "elasticbeanstalk-ap-northeast-2-000140339722"
+  bucket_path: "react-nodejs-based"
+  on:
+    branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
