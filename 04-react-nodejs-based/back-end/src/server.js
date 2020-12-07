@@ -7,6 +7,21 @@ const app = express();
 
 app.use(bodyParser.json());
 
+if (process.env.NODE_ENV === 'prod') {
+  // 테이블 생성하기
+  db.pool.query(
+    `CREATE TABLE lists (
+      id INTEGER AUTO_INCREMENT,
+      value TEXT, 
+      PRIMARY KEY (id)
+    )`,
+    (err, results, fields) => {
+      console.log('results', results);
+      console.log('fields', fields);
+    }
+  );
+}
+
 app.get('/api/values', (req, res) => {
   db.pool.query('select id, value from lists', (err, results) => {
     if (err) {
@@ -30,5 +45,12 @@ app.post('/api/value', (req, res) => {
 });
 
 app.listen(5000, () => {
+  console.log(process.env.MYSQL_HOST);
+  console.log(process.env.MYSQL_USER);
+  console.log(process.env.MYSQL_ROOT_PASSWORD);
+  console.log(process.env.MYSQL_DATABASE);
+  console.log(process.env.MYSQL_PORT);
+  console.log(process.env.NODE_ENV);
+
   console.log('server is running..');
 });
