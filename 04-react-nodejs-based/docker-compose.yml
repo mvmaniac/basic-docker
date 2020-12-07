@@ -1,5 +1,8 @@
+# --build 옵션을 줄 경우 강제로 이미지를 빌드 함, 없을 경우 이미지가 존재하지 않을 때만 빌드
+# 만약 파일명이 다르다면 -f 옵션을 주어서 해당 파일명을 명시 ex) docker-compose -f docker-compose.dev.yml -p react-nodejs-based up -d --build
 # docker-compose -p react-nodejs-based up -d --build
 # docker-compose -p react-nodejs-based down
+# expose의 포트는 명시적으로 해줌
 
 version: "3.8"
 services:
@@ -8,6 +11,7 @@ services:
     build:
       dockerfile: Dockerfile.dev
       context: ./front-end
+      network: host
     volumes:
       - /app/node_modules
       - ./front-end:/app
@@ -20,9 +24,16 @@ services:
     build:
       dockerfile: Dockerfile.dev
       context: ./back-end
+      network: host
     volumes:
       - /app/node_modules
       - ./back-end:/app
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: docker_db
+      MYSQL_PORT: 3306
     expose:
       - "5000"
 
@@ -48,4 +59,4 @@ services:
       dockerfile: Dockerfile
       context: ./nginx
     ports:
-      - 3000:80
+      - "3000:80"

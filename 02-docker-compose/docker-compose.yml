@@ -1,3 +1,4 @@
+# --build 옵션을 줄 경우 강제로 이미지를 빌드 함, 없을 경우 이미지가 존재하지 않을 때만 빌드
 # docker-compose -p mvmaniaz up -d --build
 version: "3.8"
 services:
@@ -8,8 +9,8 @@ services:
       - 6379:6379
   compose:
     container_name: app
-    build: 
+    build:
       context: .
       network: host # VirtualBox 에서 실행 할 경우
     ports:
-        - 8080:8080
+      - 8080:8080
