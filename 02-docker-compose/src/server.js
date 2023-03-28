@@ -11,8 +11,8 @@ const client = redis.createClient({
 
 client.set('number', 0);
 
-app.get('/', (req, res) => {
-  client.get('number', (err, number) => {
+app.get('/', (_req, res) => {
+  client.get('number', (_err, number) => {
     client.set('number', parseInt(number, 10) + 1);
 
     res.send(`숫자가 1씩 올라갑니다. 숫자 ${number}`);

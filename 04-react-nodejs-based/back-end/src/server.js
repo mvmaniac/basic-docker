@@ -1,11 +1,10 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 
 const db = require('./db');
 
 const app = express();
 
-app.use(bodyParser.json());
+app.use(express.json());
 
 if (process.env.NODE_ENV === 'prod') {
   // 테이블 생성하기
@@ -15,14 +14,14 @@ if (process.env.NODE_ENV === 'prod') {
       value TEXT, 
       PRIMARY KEY (id)
     )`,
-    (err, results, fields) => {
+    (_err, results, fields) => {
       console.log('results', results);
       console.log('fields', fields);
     }
   );
 }
 
-app.get('/api/values', (req, res) => {
+app.get('/api/values', (_req, res) => {
   db.pool.query('select id, value from lists', (err, results) => {
     if (err) {
       return res.status(500).end();
@@ -39,7 +38,7 @@ app.post('/api/value', (req, res) => {
       if (err) {
         return res.status(500).end();
       }
-      return res.json({success: true, value: req.body.value});
+      return res.json({ success: true, value: req.body.value });
     }
   );
 });

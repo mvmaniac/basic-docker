@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import logo from './logo.svg';
@@ -23,7 +23,7 @@ function App() {
   const submitHandler = (event) => {
     event.preventDefault();
 
-    axios.post('/api/value', {value}).then((response) => {
+    axios.post('/api/value', { value }).then((response) => {
       if (response.data.success) {
         console.log('response post', response);
 
